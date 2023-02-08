@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const { v4: uuidv4 } = require('uuid');
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -16,8 +17,14 @@ app.get('/', (req, res) => {
 
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  socket.on('message', (msg) => {
+    const msgparse = JSON.parse(msg)
+    msgparse.id = uuidv4()
+    io.emit("messagelist", JSON.stringify(msgparse));
+  })
 });
+
+
 
 server.listen(3000, () => {
   console.log('listening on *:3000');
