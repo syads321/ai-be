@@ -1,0 +1,8 @@
+{
+  "name": "ai-be",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.6.0"
+  }
+}
